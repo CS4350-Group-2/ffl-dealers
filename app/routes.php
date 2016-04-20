@@ -129,4 +129,51 @@ Route::get('userdetail/', function()
         
 });
 
+Route::post('ffldetail/setRating/{fflid}', function($fflid)  //This was function()
+{
+	if (Auth::check() )
+	{
+		$user = Auth::user();
+		$ffl = ffl::where('fflid', '=', $fflid)->first();
+		$selectedRating = $request->rating;
+		$existingRating = Rating::where('uid', '=' , $user->id)
+			->where('fflid', '=', $fflid)
+			->first();
+
+		//Update user ratings
+		if($existingRating == null)
+		{
+			$rating = new Rating;
+			$rating->uid = $user->id;
+			$rating->fflid = $fflid;
+			$rating->rating = $selectedRating;
+	
+			$rating->save();
+		}
+		else
+		{
+			$rating = Rating::find($existingRating->id);
+			$rating->rating = $selectedRating;
+
+			$rating->save();
+		}
+
+		//Update ffl total rating
+		$ratings = Rating::where('fflid', '=', $fflid)->get();
+		$sum = 0;
+		$count = 0;
+		foreach ($ratings as $rating)
+		{
+			$sum += $rating->rating;
+			$count++;
+		}	
+
+		$ffl->Rating = $sum / $count;
+
+		$ffl->save();
+	
+	
+	
+	}	//this was missing before
+});
 

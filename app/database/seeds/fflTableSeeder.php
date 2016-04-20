@@ -19,7 +19,8 @@ class fflTableSeeder extends Seeder
         'VoicePhone' => '8017567625',
         'Email' => '',
         'Website' => '',
-        'AcceptTransfer' => ''
+        'AcceptTransfer' => '',
+        'Rating' => 3
        
     ));
     
@@ -34,7 +35,8 @@ class fflTableSeeder extends Seeder
         'VoicePhone' => '5123143465',
         'Email' => '',
         'Website' => '',
-        'AcceptTransfer' => ''
+        'AcceptTransfer' => '',
+        'Rating' => 3
        
     ));
     
@@ -49,7 +51,8 @@ class fflTableSeeder extends Seeder
         'VoicePhone' => '8017683504',
         'Email' => '',
         'Website' => '',
-        'AcceptTransfer' => ''
+        'AcceptTransfer' => '',
+        'Rating' => 3
        
     ));
       

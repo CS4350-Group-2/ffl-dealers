@@ -26,6 +26,7 @@ class CreateFflsTable extends Migration {
 			$table->string('Email', 320);
 			$table->string('Website', 255);
 			$table->boolean('AcceptTransfer')->default(0);
+			$table->double('Rating', 2, 1);
 			$table->timestamps();
 			
 		});

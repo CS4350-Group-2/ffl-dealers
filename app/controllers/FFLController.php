@@ -43,7 +43,6 @@ class FFLController extends BaseController {
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -54,7 +53,6 @@ class FFLController extends BaseController {
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -65,7 +63,7 @@ class FFLController extends BaseController {
      */
     public function update($id)
     {
-        //
+ 
     }
 
     /**
