@@ -9,10 +9,19 @@ public function run()
 {
     DB::table('users')->delete();
     User::create(array(
-        'name'     => 'Test User',
+        'name'     => 'Philip Butler',
         'username' => 'test',
-        'email'    => 'pbutler83@hotmail.com',
-        'password' => Hash::make('awesome'),
+        'email'    => 'philipbutler@mail.weber.edu',
+        'password' => Hash::make('shinra'),
+        'fflid' => 1
+    ));
+	
+    User::create(array(
+        'name'     => 'Brandon Richardson',
+        'username' => 'brandon',
+        'email'    => 'brandon.richardson@mail.weber.edu',
+        'password' => Hash::make('test'),
+        'fflid' => 2
     ));
 }
 

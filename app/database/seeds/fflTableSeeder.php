@@ -6,20 +6,7 @@ class fflTableSeeder extends Seeder
   public function run()
   {
     DB::table('ffls')->delete();
-    ffl::create(array(
-        'LicType'     => '01',
-        'LicXprdte' => '6D',
-        'LicenseName'    => 'AMERICAN RPM AUTO PARTS INC',
-        'PremiseStreet' => '265 EAST STATE STREET',
-        'PremiseCity' => 'AMERICAN FORK',
-        'PremiseState' => 'UT',
-        'PremiseZipCode' => '84003',
-        'VoicePhone' => '8017567625',
-        'Email' => '',
-        'Website' => '',
-        'AcceptTransfer' => ''
-       
-    ));
+    
     
     ffl::create(array(
         'LicType'     => '01',
