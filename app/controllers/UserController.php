@@ -86,7 +86,8 @@ class UserController extends BaseController {
 
 		$user = ffl::where('id', '=', $id)->first();                                                                                                                                                                      
 		$user->Email = Input::get('Email');                                                                                                                                                                                   
-		$user->Password = Input::get('Website');                                                                                                                                                                                  
+		$user->Password = Input::get('Password');                                                                                                                                                                                  
+		$user->Subscribe = Input::get('Subscribe');
 		$user->save();                                                                                                                                                                                                             
 
 		Session::flash('message', 'Successfully updated User!');                                                                                                                                                            

@@ -24,18 +24,33 @@ $favorites = Favorite::where('userid', '=', $user->id)->get();
 
     <div class="form-group">
         {{ Form::label('Name', 'Name') }}
-        {{ Form::text('Name', null, array('class' => 'form-control')) }}
+        {{ Form::text('Name', $user->name, array('class' => 'form-control')) }}
     </div>
 
     <div class="form-group">
         {{ Form::label('Email', 'Email') }}
-        {{ Form::email('Email', null, array('class' => 'form-control')) }}
+        {{ Form::email('Email', $user->email, array('class' => 'form-control')) }}
     </div>
 
     <div class="form-group">
         {{ Form::label('Password', 'Password') }}
 		{{ Form::password('Password') }}
     </div>
+	<div>
+		{{ Form::label('Subscribe', 'Subscribe') }}
+		{{ Form::label('text', Input::old('Subscribe')) }}
+		@if (Input::old('Subscribe') === 0)
+			{{ Form::label('Subscribe', 'yes') }}
+			{{ Form::radio('Subscribe', 'yes') }}
+			{{ Form::label('Subscribe', 'no') }}
+			{{ Form::radio('Subscribe', 'no', true) }}
+		@else
+			{{ Form::label('Subscribe', 'yes') }}
+			{{ Form::radio('Subscribe', 'yes', true) }}
+			{{ Form::label('Subscribe', 'no') }}
+			{{ Form::radio('Subscribe', 'no') }}
+		@endif
+	</div>
     <div class="form-group">
 		{{ Form::submit('Edit the User!', array('class' => 'btn btn-primary')) }}
     </div>
