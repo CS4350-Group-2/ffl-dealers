@@ -38,7 +38,7 @@
     <tbody>
     @foreach($ffls as $key => $value)
         <tr>
-            <td>{{ $value->fflid }}</td>
+            <td>{{ $value->lid }}</td>
             <td>{{ $value->LicenseName }}</td>
             <td>{{ $value->LicType }}</td>
             <td>{{ $value->LicXprdte }}</td>
@@ -59,7 +59,7 @@
                 <!-- we will add this later since its a little more complicated than the other two buttons -->
 
                 <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('ffldetail/' . $value->fflid) }}">Show this FFL Dealer</a>
+                <a class="btn btn-small btn-success" href="{{ URL::to('ffl/' . $value->id) }}">Show this FFL Dealer</a>
 
 
 

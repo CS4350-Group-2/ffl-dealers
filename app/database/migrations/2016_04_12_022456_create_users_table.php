@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration {
           $table->string('username', 32);
           $table->string('email', 320);
           $table->string('password', 64);
-			 		$table->integer('fflid')->references('fflid')->on('ffls');   //used to check if user is a Dealer user;
-			 		$table->boolean('subscribed')->default(0);
+          $table->integer('fflid')->references('id')->on('ffls');   //used to check if user is a Dealer user;
+          $table->boolean('subscribed')->default(0);
 			 
 
 					// required for Laravel 4.1.26

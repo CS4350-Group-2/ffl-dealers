@@ -16,7 +16,7 @@ class CreateDealsTable extends Migration {
 		{
 				$table->increments('dealid');
 				$table->string('name', 255);
-				$table->integer('fflid')->references('fflid')->on('ffls');   //used to check if user is a Dealer user;
+				$table->integer('fflid')->references('id')->on('ffls');   //used to check if user is a Dealer user;
 				$table->timestamps();
 		});
 	}

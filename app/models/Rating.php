@@ -1,6 +1,6 @@
-<? php
-	
-	class Rating extends Eloquent
-	{
+<?php
 
-	}
+class Rating extends Eloquent
+{
+  protected $table = 'ratings';
+}

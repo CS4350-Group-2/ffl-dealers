@@ -1,8 +1,6 @@
-// app/controllers/DealerController.php
-
 <?php
 
-class DealerController extends BaseController {
+class UserController extends BaseController {
 
     /**
      * Display a listing of the resource.
@@ -53,7 +51,28 @@ class DealerController extends BaseController {
      */
     public function edit($id)
     {
-        //
+       
+      if (Auth::check())
+      {
+         $user = Auth::user();
+          
+          if ($user->id == $id)
+          {
+             $favorites = Favorite::where('userid', '=', $id)->get();
+             return View::make('userdetail')
+            ->with('favorites',$favorites)->with('user',$user);
+          }
+          else
+          {
+              return View::make('login');
+          }
+      }
+      else
+      {
+          return View::make('login');
+      }  
+
+
     }
 
     /**
@@ -64,7 +83,7 @@ class DealerController extends BaseController {
      */
     public function update($id)
     {
-        //
+        //FILL ME IN AARON! :) 
     }
 
     /**

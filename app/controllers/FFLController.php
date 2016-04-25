@@ -1,5 +1,3 @@
-// app/controllers/FFLController.php
-
 <?php
 
 class FFLController extends BaseController {
@@ -11,8 +9,8 @@ class FFLController extends BaseController {
      */
     public function index()
     {
-        //
-      $dealers = DealerController
+        
+          
     }
 
     /**
@@ -43,6 +41,22 @@ class FFLController extends BaseController {
      */
     public function show($id)
     {
+      if (Auth::check())
+      {
+        $ffl = ffl::where('id', '=', $id)->first();
+
+        $deals = Deal::where('fflid', '=', $id)->get();
+
+
+        return View::make('ffldetail')
+            ->with('ffl', $ffl)
+            ->with('deals', $deals);
+      }
+      else
+      {
+        return View::make('login');
+      } 
+      
     }
 
     /**
@@ -53,6 +67,35 @@ class FFLController extends BaseController {
      */
     public function edit($id)
     {
+      
+      if (Auth::check())
+      {
+         $user = Auth::user();
+
+        if ($user->fflid > 0)
+        {    
+           $ffl = ffl::where('id', '=', $id)->first();
+          
+           if (isset($ffl) && $ffl->id == $user->fflid )
+           {
+              return View::make('ffldetailedit')->with('ffl',$ffl);
+
+           }
+           else
+           {
+              echo 'Error: Invalid FFLID!';
+           }
+        }
+        else
+        {
+          return View::make('login');
+        }
+
+      }
+      else
+      {
+        return View::make('login');
+      } 
     }
 
     /**
@@ -64,6 +107,18 @@ class FFLController extends BaseController {
     public function update($id)
     {
  
+            $ffl =   $ffl = ffl::where('id', '=', $id)->first();
+            $ffl->VoicePhone      = Input::get('VoicePhone');
+            $ffl->Email      = Input::get('Email');
+            $ffl->Website   = Input::get('Website');
+            $ffl->AcceptTransfer  = Input::get('AcceptTransfer');
+            $ffl->Bio  = Input::get('Bio');
+            $ffl->save();
+
+   
+            Session::flash('message', 'Successfully updated FFL Dealer!');
+            return Redirect::to('ffl');
+       // }
     }
 
     /**

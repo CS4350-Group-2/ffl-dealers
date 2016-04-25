@@ -16,7 +16,7 @@ class CreateCommentsTable extends Migration {
 		{
 				$table->increments('commentid');
 			  $table->integer('userid')->references('id')->on('users');
-				$table->integer('fflid')->references('fflid')->on('ffls');  
+				$table->integer('fflid')->references('id')->on('ffls');  
 				$table->string('comment', 255);
 				$table->timestamps();
 		});

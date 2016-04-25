@@ -42,7 +42,7 @@
               @foreach($localdeals as $key => $value)
               <tr>
 
-                <td><a class="btn btn-small btn-success" href="{{ URL::to('ffldetail/' . $value->fflid) }}">{{ $value->name }}</a> </td>
+                <td><a class="btn btn-small btn-success" href="{{ URL::to('ffl/' . $value->id) }}">{{ $value->name }}</a> </td>
               </tr>
               @endforeach
             </tbody>
@@ -62,7 +62,7 @@
               @foreach($featureddealers as $key => $value)
               <tr>
 
-                <td><a class="btn btn-small btn-success" href="{{ URL::to('ffldetail/' . $value->fflid) }}">{{ $value->LicenseName }}</a> </td>
+                <td><a class="btn btn-small btn-success" href="{{ URL::to('ffl/' . $value->id) }}">{{ $value->LicenseName }}</a> </td>
               </tr>
               @endforeach
             </tbody>
@@ -81,7 +81,7 @@
               @foreach($localdealers as $key => $value)
               <tr>
 
-                <td><a class="btn btn-small btn-success" href="{{ URL::to('ffldetail/' . $value->fflid) }}">{{ $value->LicenseName }}</a> </td>
+                <td><a class="btn btn-small btn-success" href="{{ URL::to('ffl/' . $value->id) }}">{{ $value->LicenseName }}</a> </td>
               </tr>
               @endforeach
             </tbody>

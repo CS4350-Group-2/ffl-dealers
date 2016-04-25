@@ -18,6 +18,7 @@ class CreateRatinsgTable extends Migration {
 			$table->integer('uid');
 			$table->integer('fflid');
 			$table->double('rating', 2, 1);
+			$table->timestamps();
 		});
 	}
 

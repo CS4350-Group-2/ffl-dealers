@@ -13,7 +13,7 @@ public function run()
         'username' => 'test',
         'email'    => 'philipbutler@mail.weber.edu',
         'password' => Hash::make('shinra'),
-        'fflid' => 10
+        'fflid' => 1
     ));
 	
     User::create(array(
@@ -21,7 +21,7 @@ public function run()
         'username' => 'brandon',
         'email'    => 'brandon.richardson@mail.weber.edu',
         'password' => Hash::make('test'),
-        'fflid' => 11
+        'fflid' => 12
     ));
 }
 

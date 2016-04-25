@@ -1,11 +1,11 @@
+<?php
+$favorites = Favorite::where('userid', '=', $user->id)->get();
+?>
 
-@if(Auth::check())
-    <?php $user = Auth::user(); ?>
-@endif
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FFL Dealers</title>
+    <title>User Detail</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>

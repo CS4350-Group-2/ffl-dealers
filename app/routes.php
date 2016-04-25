@@ -12,58 +12,53 @@
 */
 
 
+Route::resource('ffl', 'FFLController');
 
-Route::get('ffldetail/edit/', function()
-{
-  if (Auth::check())
-	{
-     $user = Auth::user();
-    
-    if ($user->fflid > 0)
-    {    
-       $ffl = ffl::where('fflid', '=', $user->fflid)->first();
-			
-			 if (isset($ffl) )
-			 {
-				 	return View::make('ffldetailedit')->with('ffl',$ffl);
-				 
-			 }
-			 else
-			 {
-					echo 'Error: Invalid FFLID for this user!!';
-			 }
-    }
-    else
-    {
-      return View::make('login');
-    }
-    
-  }
-  else
-  {
-    return View::make('login');
-  } 
-});
+Route::resource('User', 'UserController');
 
-
- Route::get('secure', array('uses' => 'HomeController@showSecure'));
-
-       
+// route to show the secure page
+Route::get('secure', array('uses' => 'HomeController@showSecure'));
 
 // route to show the login form
 Route::get('/', array('uses' => 'HomeController@showLogin'));
 
 Route::get('login', array('uses' => 'HomeController@showLogin'));
 
-// route to show the secure page
-//
 
-// route to process the form
 Route::post('login', array('uses' => 'HomeController@doLogin'));
 
 Route::get('logout', array('uses' => 'HomeController@doLogout'));
 
+// used for "Claim this dealer"
+Route::post('user/fflid/{fflid}', function($fflid)
+{
+    
+  if (Auth::check())
+	{
+   	$user = Auth::user();
+		
+		$user->fflid = $fflid;
+		
+		$user->save();
+		
+		$app = app();
+    $controller = $app->make('FFLController');
+    return $controller->callAction('edit', $parameters = array($fflid));
+		
+  }
+  else
+  {
+    return View::make('login');
+  }
+  
+   
+});
 
+
+
+
+
+//route used for ffl search
 Route::get('ffl', function()
 {
     
@@ -89,71 +84,32 @@ Route::get('ffl', function()
 });
 
 
-Route::get('ffldetail/{fflid}', function($fflid)
+
+Route::post('ffldetail/setRating/{fflid}/{newrating}', function($fflid,$newrating)  
 {
-  if (Auth::check())
-	{
-    $ffl = ffl::where('fflid', '=', $fflid)->first();
-    
-    $deals = Deal::where('fflid', '=', $fflid)->get();
-    
-    
-    return View::make('ffldetail')
-        ->with('ffl', $ffl)
-        ->with('deals', $deals);
-  }
-  else
-  {
-    return View::make('login');
-  } 
-});
-
-
-
-Route::get('userdetail/', function()
-{
-  if (Auth::check())
-	{
-    
-    $user = Auth::user();
-    
-    $favorites = Favorite::where('userid', '=', $user->id)->get();
-    return View::make('userdetail')
-      ->with('favorites',$favorites);
-    
-  }
-  else
-  {
-    return View::make('login');
-  }
-        
-});
-
-Route::post('ffldetail/setRating/{fflid}', function($fflid)  //This was function()
-{
-	if (Auth::check() )
+		if (Auth::check() )
 	{
 		$user = Auth::user();
-		$ffl = ffl::where('fflid', '=', $fflid)->first();
-		$selectedRating = $request->rating;
+		$ffl = ffl::where('id', '=', $fflid)->first();
 		$existingRating = Rating::where('uid', '=' , $user->id)
 			->where('fflid', '=', $fflid)
 			->first();
-
+		
 		//Update user ratings
-		if($existingRating == null)
+		if( !isset($existingRating))
 		{
+			
 			$rating = new Rating;
 			$rating->uid = $user->id;
 			$rating->fflid = $fflid;
-			$rating->rating = $selectedRating;
+			$rating->rating = $newrating;
 	
 			$rating->save();
 		}
 		else
 		{
 			$rating = Rating::find($existingRating->id);
-			$rating->rating = $selectedRating;
+			$rating->rating = $newrating;
 
 			$rating->save();
 		}
@@ -176,4 +132,6 @@ Route::post('ffldetail/setRating/{fflid}', function($fflid)  //This was function
 	
 	}	//this was missing before
 });
+
+
 

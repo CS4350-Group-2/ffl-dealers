@@ -14,7 +14,7 @@ class CreateFflsTable extends Migration {
 	{
 		Schema::create('ffls', function(Blueprint $table)
 		{
-			$table->increments('fflid');
+			$table->increments('id');
 			$table->string('LicType', 255);
 			$table->string('LicXprdte', 255);
 			$table->string('LicenseName', 255);
@@ -25,8 +25,9 @@ class CreateFflsTable extends Migration {
 			$table->string('VoicePhone', 255);
 			$table->string('Email', 320);
 			$table->string('Website', 255);
-			$table->boolean('AcceptTransfer')->default(0);
+			$table->integer('AcceptTransfer')->default(3);
 			$table->double('Rating', 2, 1);
+			$table->string('Bio', 255);
 			$table->timestamps();
 			
 		});

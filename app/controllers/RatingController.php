@@ -56,7 +56,7 @@ class RatingController extends \BaseController {
 	public function edit($id)
 	{
 		$dealer = ffl::find($id);
-		$dealer->Rating = $requeste->rating;
+		$dealer->Rating = $request->rating;
 		$dealer->save();
 	}
 
