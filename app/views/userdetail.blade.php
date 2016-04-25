@@ -13,8 +13,39 @@ $favorites = Favorite::where('userid', '=', $user->id)->get();
 
 @include('header')
 
+<div class="container">
 
+<h1>Edit {{ $user->name }}</h1>
+
+<!-- if there are creation errors, they will show here -->
+{{ HTML::ul($errors->all()) }}
+
+{{ Form::model($user, array('route' => array('User.update', $user->id), 'method' => 'PUT')) }}
+
+    <div class="form-group">
+        {{ Form::label('Name', 'Name') }}
+        {{ Form::text('Name', null, array('class' => 'form-control')) }}
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('Email', 'Email') }}
+        {{ Form::email('Email', null, array('class' => 'form-control')) }}
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('Password', 'Password') }}
+		{{ Form::password('Password') }}
+    </div>
+    <div class="form-group">
+		{{ Form::submit('Edit the User!', array('class' => 'btn btn-primary')) }}
+    </div>
+
+
+{{ Form::close() }}
+
+</div>
    
+<div>
      
   <p>Fill me out with stuff! $user has the User object in it and should be accessable from this page.</p>
   <p>$favorites has an array of Favorite objects in it.</p>

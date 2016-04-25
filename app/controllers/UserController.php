@@ -81,9 +81,18 @@ class UserController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
-    {
-        //FILL ME IN AARON! :) 
+    public function update($id)                                                                                                                                                                                                       
+	{                                                                                                                                                                                                                                 
+
+		$user = ffl::where('id', '=', $id)->first();                                                                                                                                                                      
+		$user->Email = Input::get('Email');                                                                                                                                                                                   
+		$user->Password = Input::get('Website');                                                                                                                                                                                  
+		$user->save();                                                                                                                                                                                                             
+
+		Session::flash('message', 'Successfully updated User!');                                                                                                                                                            
+
+		// TODO: Figure out where to redirect after editing user.
+		return Redirect::to('ffl');                                                                                                                                                                                               
     }
 
     /**
