@@ -37,18 +37,18 @@ $favorites = Favorite::where('userid', '=', $user->id)->get();
 		{{ Form::password('Password') }}
     </div>
 	<div>
-		{{ Form::label('Subscribe', 'Subscribe') }}
-		{{ Form::label('text', Input::old('Subscribe')) }}
-		@if (Input::old('Subscribe') === 0)
-			{{ Form::label('Subscribe', 'yes') }}
-			{{ Form::radio('Subscribe', 'yes') }}
-			{{ Form::label('Subscribe', 'no') }}
-			{{ Form::radio('Subscribe', 'no', true) }}
+{{ $user->subscribed }}
+		{{ Form::label('Subscribed', 'Subscribed') }}
+		@if ($user->subscribed === '0')
+			{{ Form::label('Subscribed', 'yes') }}
+			{{ Form::radio('Subscribed', '1') }}
+			{{ Form::label('Subscribed', 'no') }}
+			{{ Form::radio('Subscribed', '0', true) }}
 		@else
-			{{ Form::label('Subscribe', 'yes') }}
-			{{ Form::radio('Subscribe', 'yes', true) }}
-			{{ Form::label('Subscribe', 'no') }}
-			{{ Form::radio('Subscribe', 'no') }}
+			{{ Form::label('Subscribed', 'yes') }}
+			{{ Form::radio('Subscribed', '1', true) }}
+			{{ Form::label('Subscribed', 'no') }}
+			{{ Form::radio('Subscribed', '0') }}
 		@endif
 	</div>
     <div class="form-group">

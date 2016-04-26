@@ -10,6 +10,7 @@ class UserController extends BaseController {
     public function index()
     {
         //
+			
     }
 
     /**
@@ -19,7 +20,7 @@ class UserController extends BaseController {
      */
     public function create()
     {
-        //
+        return View::make('register');
     }
 
     /**
@@ -30,6 +31,34 @@ class UserController extends BaseController {
     public function store()
     {
         //
+			
+			  $rules = array(
+					'name' => 'required|min:2',
+					'username' => 'required',
+          'email'    => 'required|email', // make sure the email is an actual email
+					'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to('User/create')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            // store
+            $user = new User;
+            
+					  $user->username = Input::get('username');
+            $user->email      = Input::get('email');
+					  $user->name =     Input::get('name');
+            $user->password =  Hash::make(Input::get('password'));
+            $user->save();
+
+            // redirect
+            Session::flash('message', 'Successfully created User!');
+            return Redirect::to('login');
+				}
     }
 
     /**

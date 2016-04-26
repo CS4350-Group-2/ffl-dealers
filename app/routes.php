@@ -14,6 +14,8 @@
 
 Route::resource('ffl', 'FFLController');
 
+Route::resource('Favorite', 'FavoriteController');
+
 Route::resource('User', 'UserController');
 
 // route to show the secure page

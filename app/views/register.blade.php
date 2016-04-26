@@ -7,8 +7,8 @@
 </head>
 <body>
 
-    {{ Form::open(array('url' => 'login')) }}
-    <h1>Login</h1>
+    {{ Form::open(array('url' => 'User')) }}
+    <h1>Register Here!</h1>
 
     <!-- if there are login errors, show them here -->
     <p>
@@ -16,14 +16,24 @@
         {{ $errors->first('email') }}
         {{ $errors->first('password') }}
     </p>
-
+        
+  
+        <div class="form-group">
+          {{ Form::label('username', 'Username:') }}
+          {{ Form::text('username') }}
+        </div>
 
         <div class="form-group">
           {{ Form::label('email', 'Email Address:') }}
           {{ Form::text('email', Input::old('email'), array('placeholder' => 'awesome@awesome.com')) }}
         </div>
 
-
+        <div class="form-group">
+          {{ Form::label('name', 'Name:') }}
+          {{ Form::text('name') }}
+        </div>
+  
+  
 
         <div class="form-group">
           {{ Form::label('password', 'Password:') }}
@@ -31,16 +41,8 @@
         </div>
 
 
-    <p>{{ Form::submit('Submit!') }}</p>
+    <p>{{ Form::submit('Register!') }}</p>
     {{ Form::close() }}
-  
- 
-  
-     <a class="btn btn-small btn-success" href="User/create">Register Here!</a>
-  
   </body>
-  
-  
-  
 </html>
      
