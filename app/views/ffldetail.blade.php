@@ -29,7 +29,12 @@
   <div id="rateYo"></div> 
 	<div id="info"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js"></script>
-  <p> Add to My Favorites Button</p>
+	
+	<p><button type="button" id ="favorite" class="btn btn-small btn-success">
+		 Add To My Favorites
+  </button></p>
+	
+	
   <p> Location (with google map)</p>
 	<iframe
   width="500"
@@ -127,6 +132,21 @@ $(function () {
 });
 	
 	
+$('#favorite').click(function()
+{
+    $.ajax({
+        url: '/User/<?php echo $user->id ?>/AddFavorite/<?php echo $ffl->id ?>',
+        type:'POST',
+        success: function(msg)
+        {
+            alert('Favorite Added');
+        } , 
+				 error: function (request, error) {
+        console.log(arguments);
+        alert(" Can't do because: " + error);
+    }
+    });
+});
 	
 	
 </script>

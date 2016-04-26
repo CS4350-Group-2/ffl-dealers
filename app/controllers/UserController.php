@@ -113,16 +113,17 @@ class UserController extends BaseController {
     public function update($id)                                                                                                                                                                                                       
 	{                                                                                                                                                                                                                                 
 
-		$user = ffl::where('id', '=', $id)->first();                                                                                                                                                                      
-		$user->Email = Input::get('Email');                                                                                                                                                                                   
-		$user->Password = Input::get('Password');                                                                                                                                                                                  
-		$user->Subscribe = Input::get('Subscribe');
+		$user = User::where('id', '=', $id)->first();  
+		$user->name = Input::get('Name');  
+		$user->email = Input::get('Email');                                                                                                                                                                                   
+		$user->password = Hash::make(Input::get('Password'));                                                                                                                                                                                 
+		$user->subscribed = Input::get('Subscribed');
 		$user->save();                                                                                                                                                                                                             
 
 		Session::flash('message', 'Successfully updated User!');                                                                                                                                                            
 
 		// TODO: Figure out where to redirect after editing user.
-		return Redirect::to('ffl');                                                                                                                                                                                               
+		return Redirect::to('User/'.$id.'/edit');                                                                                                                                                                                               
     }
 
     /**

@@ -14,8 +14,6 @@
 
 Route::resource('ffl', 'FFLController');
 
-Route::resource('Favorite', 'FavoriteController');
-
 Route::resource('User', 'UserController');
 
 // route to show the secure page
@@ -87,9 +85,51 @@ Route::get('ffl', function()
 
 
 
+Route::post('User/{userid}/AddFavorite/{fflid}', function ($userid,$fflid)
+ {
+		
+	 if (Auth::check())
+	 {
+		 $user = Auth::user();
+		 
+		 $favorite = Favorite::where('userid','=', $userid)->where('fflid','=',$fflid)->first();
+
+			if (!isset ($favorite) && $user->id == $userid)
+			{
+				$favorite = new Favorite;
+				$favorite->userid =$userid;
+				$favorite->fflid = $fflid;
+				$favorite->save();
+			}
+	 }
+	 
+ });
+
+
+Route::post('User/{userid}/RemoveFavorite/{fflid}', function ($userid,$fflid)
+ {
+		
+	 if (Auth::check())
+	 {
+		 $user = Auth::user();
+		 
+		 $favorite = Favorite::where('userid','=', $userid)->where('fflid','=',$fflid)->first();
+
+			if (isset ($favorite) && $user->id == $userid)
+			{
+				
+				$favorite->delete();
+			}
+	 }
+	 
+ });
+
+
+
+
 Route::post('ffldetail/setRating/{fflid}/{newrating}', function($fflid,$newrating)  
 {
-		if (Auth::check() )
+	if (Auth::check() )
 	{
 		$user = Auth::user();
 		$ffl = ffl::where('id', '=', $fflid)->first();
